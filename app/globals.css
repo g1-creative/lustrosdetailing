@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-inter: 'Inter', system-ui, sans-serif;
+    --font-display: 'Inter', system-ui, sans-serif;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-luxury-dark text-white;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-luxury-gold text-luxury-dark font-bold py-4 px-8 rounded-lg 
+           hover:bg-opacity-90 transition-all duration-300 transform hover:scale-105
+           shadow-lg hover:shadow-xl;
+  }
+
+  .btn-secondary {
+    @apply bg-transparent border-2 border-white text-white font-bold py-4 px-8 rounded-lg 
+           hover:bg-white hover:text-luxury-dark transition-all duration-300
+           transform hover:scale-105;
+  }
+
+  .section-padding {
+    @apply py-20 px-4 sm:px-6 lg:px-8;
+  }
+
+  .container-custom {
+    @apply max-w-7xl mx-auto;
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-r from-luxury-gold via-yellow-400 to-luxury-gold 
+           bg-clip-text text-transparent;
+  }
+}
+
