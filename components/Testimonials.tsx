@@ -1,3 +1,5 @@
+'use client'
+
 interface Testimonial {
   name: string
   vehicle: string
