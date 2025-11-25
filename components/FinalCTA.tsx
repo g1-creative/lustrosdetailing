@@ -1,5 +1,7 @@
 'use client'
 
+import Image from 'next/image'
+
 export default function FinalCTA() {
   const handleBookNow = () => {
     // In a real application, this would open a booking form or modal
@@ -125,9 +127,18 @@ export default function FinalCTA() {
       </div>
 
       {/* Footer */}
-      <footer className="mt-16 pt-8 border-t border-gray-800 text-center text-gray-500 text-sm">
-        <p>&copy; {new Date().getFullYear()} Lustro Premium Detailing. All rights reserved.</p>
-        <p className="mt-2">Marine-Owned & Operated | Serving Greater Los Angeles</p>
+      <footer className="mt-16 pt-8 border-t border-gray-800/50 text-center">
+        <div className="flex flex-col items-center gap-4 mb-6">
+          <Image
+            src="/images/lustro-logo.png"
+            alt="Lustro Premium Detailing Logo"
+            width={120}
+            height={38}
+            className="opacity-70 hover:opacity-100 transition-opacity duration-300"
+          />
+        </div>
+        <p className="text-gray-500 text-sm">&copy; {new Date().getFullYear()} Lustro Premium Detailing. All rights reserved.</p>
+        <p className="mt-2 text-gray-500 text-sm">Marine-Owned & Operated | Serving Greater Los Angeles</p>
       </footer>
     </section>
   )

@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Image from 'next/image'
 
 export default function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -22,6 +23,11 @@ export default function Navigation() {
     }
   }
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+    setIsMobileMenuOpen(false)
+  }
+
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
@@ -32,14 +38,19 @@ export default function Navigation() {
     >
       <div className="container-custom">
         <div className="flex items-center justify-between py-4">
-          <div className="text-2xl font-bold text-luxury-gold hover:scale-110 transition-transform duration-300 cursor-pointer">
-            <span className="inline-block hover:rotate-3 transition-transform duration-300">L</span>
-            <span className="inline-block hover:-rotate-3 transition-transform duration-300">U</span>
-            <span className="inline-block hover:rotate-3 transition-transform duration-300">S</span>
-            <span className="inline-block hover:-rotate-3 transition-transform duration-300">T</span>
-            <span className="inline-block hover:rotate-3 transition-transform duration-300">R</span>
-            <span className="inline-block hover:-rotate-3 transition-transform duration-300">O</span>
-          </div>
+          <button
+            onClick={scrollToTop}
+            className="relative h-12 w-auto hover:scale-110 transition-transform duration-300 cursor-pointer"
+          >
+            <Image
+              src="/images/lustro-logo.png"
+              alt="Lustro Premium Detailing Logo"
+              width={150}
+              height={48}
+              className="object-contain h-full w-auto"
+              priority
+            />
+          </button>
           
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-8">
