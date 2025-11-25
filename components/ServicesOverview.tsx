@@ -71,33 +71,46 @@ export default function ServicesOverview() {
           {services.map((service, index) => (
             <div
               key={index}
-              className="bg-luxury-charcoal rounded-lg p-8 border border-gray-800 
-                         hover:border-luxury-gold transition-all duration-300 
-                         transform hover:scale-105 hover:shadow-2xl"
+              className="group relative bg-luxury-charcoal rounded-xl p-8 border border-gray-800 
+                         hover:border-luxury-gold transition-all duration-500 
+                         card-hover-effect overflow-hidden"
+              style={{ animationDelay: `${index * 200}ms` }}
             >
-              <div className="text-5xl mb-4">{service.icon}</div>
-              <h3 className="text-2xl font-bold mb-4 text-luxury-gold">
-                {service.title}
-              </h3>
-              <p className="text-gray-300 mb-6">{service.description}</p>
-              <ul className="space-y-2">
-                {service.benefits.map((benefit, i) => (
-                  <li key={i} className="flex items-start gap-2 text-gray-400">
-                    <svg
-                      className="w-5 h-5 text-luxury-gold mt-0.5 flex-shrink-0"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                    <span>{benefit}</span>
-                  </li>
-                ))}
-              </ul>
+              {/* Gradient Overlay on Hover */}
+              <div className="absolute inset-0 bg-gradient-to-br from-luxury-gold/0 via-luxury-gold/5 to-luxury-gold/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              
+              {/* Shimmer Effect */}
+              <div className="absolute inset-0 shimmer opacity-0 group-hover:opacity-100"></div>
+              
+              {/* Content */}
+              <div className="relative z-10">
+                <div className="text-5xl mb-4 transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-500">{service.icon}</div>
+                <h3 className="text-2xl font-bold mb-4 text-luxury-gold group-hover:text-white transition-colors duration-300">
+                  {service.title}
+                </h3>
+                <p className="text-gray-300 mb-6 group-hover:text-white transition-colors duration-300">{service.description}</p>
+                <ul className="space-y-3">
+                  {service.benefits.map((benefit, i) => (
+                    <li key={i} className="flex items-start gap-2 text-gray-400 group-hover:text-gray-200 transition-all duration-300" style={{ transitionDelay: `${i * 50}ms` }}>
+                      <svg
+                        className="w-5 h-5 text-luxury-gold mt-0.5 flex-shrink-0 transform group-hover:scale-125 transition-transform duration-300"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                      <span className="transform group-hover:translate-x-1 transition-transform duration-300">{benefit}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Corner Accent */}
+              <div className="absolute top-0 right-0 w-20 h-20 bg-luxury-gold/10 rounded-bl-full transform translate-x-10 -translate-y-10 group-hover:translate-x-0 group-hover:translate-y-0 transition-transform duration-500"></div>
             </div>
           ))}
         </div>

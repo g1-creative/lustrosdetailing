@@ -6,23 +6,27 @@ export default function AboutDetailer() {
       <div className="container-custom">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Image Section */}
-          <div className="relative">
-            <div className="relative h-96 lg:h-[500px] rounded-lg overflow-hidden border-2 border-luxury-gold">
+          <div className="relative group">
+            <div className="relative h-96 lg:h-[500px] rounded-2xl overflow-hidden border-2 border-luxury-gold hover:border-luxury-gold/70 transition-all duration-500 shadow-2xl hover:shadow-luxury-gold/30">
               <Image
                 src="/images/ferrari.png"
                 alt="Luxury Ferrari vehicle - Premium detailing showcase"
                 fill
-                className="object-cover"
+                className="object-cover transform group-hover:scale-110 transition-transform duration-700"
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 quality={90}
               />
-              <div className="absolute inset-0 bg-luxury-dark/40"></div>
+              <div className="absolute inset-0 bg-gradient-to-tr from-luxury-dark/60 via-luxury-dark/40 to-transparent group-hover:from-luxury-dark/40 transition-all duration-500"></div>
+              
+              {/* Shine Effect */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/0 to-transparent group-hover:via-white/10 transition-all duration-700"></div>
             </div>
+            
             {/* Marine Badge Overlay */}
-            <div className="absolute -bottom-6 -right-6 bg-luxury-charcoal p-6 rounded-lg border-2 border-luxury-gold shadow-2xl">
+            <div className="absolute -bottom-6 -right-6 bg-luxury-charcoal p-6 rounded-xl border-2 border-luxury-gold shadow-2xl glow transform hover:scale-110 transition-all duration-300 cursor-default">
               <div className="text-center">
-                <div className="text-3xl mb-2">🎖️</div>
-                <div className="font-bold text-luxury-gold">USMC</div>
+                <div className="text-4xl mb-2 animate-pulse">🎖️</div>
+                <div className="font-bold text-luxury-gold text-lg">USMC</div>
                 <div className="text-sm text-gray-400">Veteran Owned</div>
               </div>
             </div>

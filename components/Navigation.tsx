@@ -24,41 +24,49 @@ export default function Navigation() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled
-          ? 'bg-luxury-charcoal/95 backdrop-blur-md shadow-lg'
+          ? 'glass-effect shadow-2xl border-b border-luxury-gold/20'
           : 'bg-transparent'
       }`}
     >
       <div className="container-custom">
         <div className="flex items-center justify-between py-4">
-          <div className="text-2xl font-bold text-luxury-gold">
-            LUSTRO
+          <div className="text-2xl font-bold text-luxury-gold hover:scale-110 transition-transform duration-300 cursor-pointer">
+            <span className="inline-block hover:rotate-3 transition-transform duration-300">L</span>
+            <span className="inline-block hover:-rotate-3 transition-transform duration-300">U</span>
+            <span className="inline-block hover:rotate-3 transition-transform duration-300">S</span>
+            <span className="inline-block hover:-rotate-3 transition-transform duration-300">T</span>
+            <span className="inline-block hover:rotate-3 transition-transform duration-300">R</span>
+            <span className="inline-block hover:-rotate-3 transition-transform duration-300">O</span>
           </div>
           
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-8">
             <button
               onClick={() => scrollToSection('services')}
-              className="text-white hover:text-luxury-gold transition-colors"
+              className="text-white hover:text-luxury-gold transition-all duration-300 relative group"
             >
               Services
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-luxury-gold group-hover:w-full transition-all duration-300"></span>
             </button>
             <button
               onClick={() => scrollToSection('gallery')}
-              className="text-white hover:text-luxury-gold transition-colors"
+              className="text-white hover:text-luxury-gold transition-all duration-300 relative group"
             >
               Gallery
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-luxury-gold group-hover:w-full transition-all duration-300"></span>
             </button>
             <button
               onClick={() => scrollToSection('about')}
-              className="text-white hover:text-luxury-gold transition-colors"
+              className="text-white hover:text-luxury-gold transition-all duration-300 relative group"
             >
               About
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-luxury-gold group-hover:w-full transition-all duration-300"></span>
             </button>
             <button
               onClick={() => scrollToSection('contact')}
-              className="btn-primary text-sm py-2 px-6"
+              className="btn-primary text-sm py-2 px-6 shadow-lg hover:shadow-luxury-gold/50"
             >
               Book Now
             </button>

@@ -48,47 +48,59 @@ export default function WhyChooseLustro() {
           {reasons.map((reason, index) => (
             <div
               key={index}
-              className="text-center p-8 bg-luxury-charcoal rounded-lg 
+              className="group text-center p-8 bg-luxury-charcoal rounded-xl 
                          border border-gray-800 hover:border-luxury-gold 
-                         transition-all duration-300 transform hover:scale-105"
+                         card-hover-effect relative overflow-hidden"
             >
-              <div className="text-5xl mb-4">{reason.icon}</div>
-              <h3 className="text-xl font-bold mb-4 text-luxury-gold">
-                {reason.title}
-              </h3>
-              <p className="text-gray-400">{reason.description}</p>
+              {/* Animated Background */}
+              <div className="absolute inset-0 bg-gradient-to-br from-luxury-gold/0 via-luxury-gold/5 to-luxury-gold/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              
+              <div className="relative z-10">
+                <div className="text-6xl mb-4 inline-block transform group-hover:scale-110 group-hover:rotate-12 transition-all duration-500 floating">
+                  {reason.icon}
+                </div>
+                <h3 className="text-xl font-bold mb-4 text-luxury-gold group-hover:text-white transition-colors duration-300">
+                  {reason.title}
+                </h3>
+                <p className="text-gray-400 group-hover:text-gray-200 transition-colors duration-300">
+                  {reason.description}
+                </p>
+              </div>
+
+              {/* Shine Effect */}
+              <div className="absolute inset-0 shimmer opacity-0 group-hover:opacity-100"></div>
             </div>
           ))}
         </div>
 
         {/* Additional Trust Elements */}
         <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-luxury-charcoal/50 p-6 rounded-lg border border-gray-800">
+          <div className="group glass-effect p-6 rounded-xl border border-gray-800 hover:border-luxury-gold transition-all duration-500 card-hover-effect">
             <div className="flex items-center gap-4">
-              <div className="text-3xl">🔒</div>
+              <div className="text-4xl transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">🔒</div>
               <div>
-                <div className="font-bold text-luxury-gold mb-1">Insured & Bonded</div>
-                <div className="text-sm text-gray-400">Fully protected service</div>
+                <div className="font-bold text-luxury-gold group-hover:text-white mb-1 transition-colors duration-300">Insured & Bonded</div>
+                <div className="text-sm text-gray-400 group-hover:text-gray-300 transition-colors duration-300">Fully protected service</div>
               </div>
             </div>
           </div>
           
-          <div className="bg-luxury-charcoal/50 p-6 rounded-lg border border-gray-800">
+          <div className="group glass-effect p-6 rounded-xl border border-gray-800 hover:border-luxury-gold transition-all duration-500 card-hover-effect">
             <div className="flex items-center gap-4">
-              <div className="text-3xl">⏱️</div>
+              <div className="text-4xl transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">⏱️</div>
               <div>
-                <div className="font-bold text-luxury-gold mb-1">Flexible Scheduling</div>
-                <div className="text-sm text-gray-400">Works around your schedule</div>
+                <div className="font-bold text-luxury-gold group-hover:text-white mb-1 transition-colors duration-300">Flexible Scheduling</div>
+                <div className="text-sm text-gray-400 group-hover:text-gray-300 transition-colors duration-300">Works around your schedule</div>
               </div>
             </div>
           </div>
           
-          <div className="bg-luxury-charcoal/50 p-6 rounded-lg border border-gray-800">
+          <div className="group glass-effect p-6 rounded-xl border border-gray-800 hover:border-luxury-gold transition-all duration-500 card-hover-effect">
             <div className="flex items-center gap-4">
-              <div className="text-3xl">💎</div>
+              <div className="text-4xl transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">💎</div>
               <div>
-                <div className="font-bold text-luxury-gold mb-1">Premium Products</div>
-                <div className="text-sm text-gray-400">Only the finest materials</div>
+                <div className="font-bold text-luxury-gold group-hover:text-white mb-1 transition-colors duration-300">Premium Products</div>
+                <div className="text-sm text-gray-400 group-hover:text-gray-300 transition-colors duration-300">Only the finest materials</div>
               </div>
             </div>
           </div>
