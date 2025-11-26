@@ -236,12 +236,13 @@ export default function Hero() {
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
               onHoverStart={(e) => {
-                if (e.currentTarget) {
-                  const rect = e.currentTarget.getBoundingClientRect()
+                const target = e.currentTarget as HTMLButtonElement
+                if (target) {
+                  const rect = target.getBoundingClientRect()
                   const x = e.clientX - rect.left
                   const y = e.clientY - rect.top
-                  e.currentTarget.style.setProperty('--x', `${x}px`)
-                  e.currentTarget.style.setProperty('--y', `${y}px`)
+                  target.style.setProperty('--x', `${x}px`)
+                  target.style.setProperty('--y', `${y}px`)
                 }
               }}
             >
