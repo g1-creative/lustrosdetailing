@@ -12,23 +12,9 @@ import ScrollProgress from '@/components/ScrollProgress'
 import LoadingScreen from '@/components/LoadingScreen'
 
 export default function Home() {
-  const [showLoading, setShowLoading] = useState(false)
   const [loadingComplete, setLoadingComplete] = useState(false)
 
-  useEffect(() => {
-    // Check if loading screen has been shown before
-    const hasSeenLoading = localStorage.getItem('hasSeenLoading')
-    
-    if (!hasSeenLoading) {
-      setShowLoading(true)
-    } else {
-      setLoadingComplete(true)
-    }
-  }, [])
-
   const handleLoadingComplete = () => {
-    localStorage.setItem('hasSeenLoading', 'true')
-    setShowLoading(false)
     setLoadingComplete(true)
   }
 
