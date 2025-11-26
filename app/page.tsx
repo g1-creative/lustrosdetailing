@@ -1,10 +1,8 @@
 import Hero from '@/components/Hero'
-import TrustSignals from '@/components/TrustSignals'
-import ServicesOverview from '@/components/ServicesOverview'
-import BeforeAfterGallery from '@/components/BeforeAfterGallery'
-import WhyChooseLustro from '@/components/WhyChooseLustro'
-import Testimonials from '@/components/Testimonials'
-import AboutDetailer from '@/components/AboutDetailer'
+import About from '@/components/About'
+import Programs from '@/components/Programs'
+import SocialProof from '@/components/SocialProof'
+import Discounts from '@/components/Discounts'
 import FinalCTA from '@/components/FinalCTA'
 import Navigation from '@/components/Navigation'
 
@@ -13,13 +11,13 @@ export default function Home() {
     <main className="min-h-screen">
       <Navigation />
       <Hero />
-      <TrustSignals />
-      <ServicesOverview />
-      <BeforeAfterGallery />
-      <WhyChooseLustro />
-      <Testimonials />
-      <AboutDetailer />
-      <FinalCTA />
+      <About />
+      <Programs />
+      <SocialProof />
+      <Discounts />
+      <div id="cta">
+        <FinalCTA />
+      </div>
     </main>
   )
 }

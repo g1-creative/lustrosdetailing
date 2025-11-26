@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import Image from 'next/image'
+import { motion } from 'framer-motion'
 
 export default function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -29,58 +29,49 @@ export default function Navigation() {
   }
 
   return (
-    <nav
+    <motion.nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled
-          ? 'glass-effect shadow-2xl border-b border-luxury-gold/20'
+          ? 'bg-dark-surface/80 backdrop-blur-md border-b border-gold-electric/20'
           : 'bg-transparent'
       }`}
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
     >
-      <div className="container-custom">
+      <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between py-4">
           <button
             onClick={scrollToTop}
-            className="relative h-12 w-auto hover:scale-110 transition-transform duration-300 cursor-pointer"
+            className="text-2xl font-display font-bold text-white hover:text-gold-electric transition-colors"
           >
-            <Image
-              src="/images/lustro-logo.png"
-              alt="Lustro Premium Detailing Logo"
-              width={150}
-              height={48}
-              className="object-contain h-full w-auto"
-              priority
-            />
+            Michael Yongbi
           </button>
-          
+
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-8">
             <button
-              onClick={() => scrollToSection('services')}
-              className="text-white hover:text-luxury-gold transition-all duration-300 relative group"
-            >
-              Services
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-luxury-gold group-hover:w-full transition-all duration-300"></span>
-            </button>
-            <button
-              onClick={() => scrollToSection('gallery')}
-              className="text-white hover:text-luxury-gold transition-all duration-300 relative group"
-            >
-              Gallery
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-luxury-gold group-hover:w-full transition-all duration-300"></span>
-            </button>
-            <button
               onClick={() => scrollToSection('about')}
-              className="text-white hover:text-luxury-gold transition-all duration-300 relative group"
+              className="text-white hover:text-gold-electric transition-all duration-300 relative group"
             >
               About
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-luxury-gold group-hover:w-full transition-all duration-300"></span>
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gold-electric group-hover:w-full transition-all duration-300"></span>
             </button>
             <button
-              onClick={() => scrollToSection('contact')}
-              className="btn-primary text-sm py-2 px-6 shadow-lg hover:shadow-luxury-gold/50"
+              onClick={() => scrollToSection('programs')}
+              className="text-white hover:text-gold-electric transition-all duration-300 relative group"
             >
-              Book Now
+              Programs
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gold-electric group-hover:w-full transition-all duration-300"></span>
             </button>
+            <motion.button
+              onClick={() => scrollToSection('cta')}
+              className="btn-primary text-sm py-2 px-6"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Start Coaching
+            </motion.button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -116,35 +107,34 @@ export default function Navigation() {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden pb-4 space-y-4">
-            <button
-              onClick={() => scrollToSection('services')}
-              className="block w-full text-left text-white hover:text-luxury-gold transition-colors py-2"
-            >
-              Services
-            </button>
-            <button
-              onClick={() => scrollToSection('gallery')}
-              className="block w-full text-left text-white hover:text-luxury-gold transition-colors py-2"
-            >
-              Gallery
-            </button>
+          <motion.div
+            className="md:hidden pb-4 space-y-4"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
+          >
             <button
               onClick={() => scrollToSection('about')}
-              className="block w-full text-left text-white hover:text-luxury-gold transition-colors py-2"
+              className="block w-full text-left text-white hover:text-gold-electric transition-colors py-2"
             >
               About
             </button>
             <button
-              onClick={() => scrollToSection('contact')}
+              onClick={() => scrollToSection('programs')}
+              className="block w-full text-left text-white hover:text-gold-electric transition-colors py-2"
+            >
+              Programs
+            </button>
+            <button
+              onClick={() => scrollToSection('cta')}
               className="btn-primary w-full text-sm py-2 px-6"
             >
-              Book Now
+              Start Coaching
             </button>
-          </div>
+          </motion.div>
         )}
       </div>
-    </nav>
+    </motion.nav>
   )
 }
-
