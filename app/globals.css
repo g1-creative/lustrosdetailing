@@ -77,6 +77,31 @@
     transform: scale(1.05);
   }
 
+  /* Enhanced button glow effect */
+  .btn-primary::after {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: inherit;
+    padding: 2px;
+    background: linear-gradient(135deg, #ffd700, #ffed4e, #ffd700);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .btn-primary:hover::after {
+    opacity: 1;
+    animation: rotate-gradient 3s linear infinite;
+  }
+
+  @keyframes rotate-gradient {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+  }
+
   .section-padding {
     @apply py-20 px-4 sm:px-6 lg:px-8;
   }

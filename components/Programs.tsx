@@ -102,7 +102,7 @@ export default function Programs() {
               onMouseLeave={() => setHoveredIndex(null)}
             >
               <motion.div
-                className="absolute inset-0 bg-dark-surface rounded-2xl p-8 border border-gray-800 cursor-pointer"
+                className="absolute inset-0 bg-dark-surface rounded-2xl p-8 border border-gray-800 cursor-pointer group overflow-hidden"
                 style={{
                   transformStyle: 'preserve-3d',
                 }}
@@ -113,7 +113,18 @@ export default function Programs() {
                 transition={{
                   duration: 0.6,
                 }}
+                whileHover={{
+                  boxShadow: '0 20px 60px rgba(255, 215, 0, 0.2)',
+                }}
               >
+                {/* Animated gradient border on hover */}
+                <motion.div
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100"
+                  style={{
+                    background: 'linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 215, 0, 0.05))',
+                  }}
+                  transition={{ duration: 0.3 }}
+                />
                 {/* Front */}
                 <motion.div
                   className="absolute inset-0 p-8 flex flex-col justify-between"

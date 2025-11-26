@@ -97,11 +97,37 @@ export default function FinalCTA() {
 
           <motion.div variants={buttonVariants}>
             <motion.button
-              className="btn-primary text-lg px-12 py-6 magnetic-button"
-              whileHover={{ scale: 1.05 }}
+              className="btn-primary text-lg px-12 py-6 magnetic-button group relative overflow-hidden"
+              whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
             >
-              Start Now
+              <motion.span
+                className="relative z-10"
+                initial={{ opacity: 1 }}
+                whileHover={{ opacity: 0 }}
+              >
+                Start Now
+              </motion.span>
+              <motion.span
+                className="absolute inset-0 flex items-center justify-center relative z-10"
+                initial={{ opacity: 0, y: 20 }}
+                whileHover={{ opacity: 1, y: 0 }}
+              >
+                Start Now →
+              </motion.span>
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-gold-electric via-yellow-300 to-gold-electric opacity-0 group-hover:opacity-100"
+                animate={{
+                  backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                }}
+                style={{
+                  backgroundSize: '200% 200%',
+                }}
+              />
             </motion.button>
           </motion.div>
         </motion.div>

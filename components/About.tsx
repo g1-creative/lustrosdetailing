@@ -56,15 +56,20 @@ export default function About() {
         >
           {/* Left side - Photo */}
           <motion.div
-            className="relative h-[500px] rounded-2xl overflow-hidden"
+            className="relative h-[500px] rounded-2xl overflow-hidden group"
             variants={imageVariants}
+            whileHover={{ scale: 1.02 }}
+            transition={{ duration: 0.3 }}
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-gold-electric/10 to-transparent z-10" />
+            <div className="absolute inset-0 bg-gradient-to-br from-gold-electric/10 to-transparent z-10 group-hover:from-gold-electric/20 transition-colors" />
+            <motion.div
+              className="absolute inset-0 border-2 border-gold-electric/0 group-hover:border-gold-electric/50 rounded-2xl transition-all duration-300 z-20"
+            />
             <Image
               src="/images/mikey-girlfriend-jaycutler.png"
               alt="Michael Yongbi"
               fill
-              className="object-cover"
+              className="object-cover group-hover:scale-110 transition-transform duration-500"
               sizes="(max-width: 1024px) 100vw, 50vw"
             />
           </motion.div>

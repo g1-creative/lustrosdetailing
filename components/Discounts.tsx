@@ -68,11 +68,17 @@ export default function Discounts() {
               className="absolute inset-0 bg-gold-electric rounded-full blur-xl"
               variants={pulseVariants}
             />
-            <div className="relative bg-gold-electric text-black px-8 py-4 rounded-full">
-              <span className="text-2xl md:text-3xl font-display font-bold">
+            <motion.div 
+              className="relative bg-gold-electric text-black px-8 py-4 rounded-full overflow-hidden group"
+              whileHover={{ scale: 1.05 }}
+            >
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"
+              />
+              <span className="relative z-10 text-2xl md:text-3xl font-display font-bold">
                 SPECIAL DISCOUNTS
               </span>
-            </div>
+            </motion.div>
           </motion.div>
 
           <motion.div variants={textVariants}>

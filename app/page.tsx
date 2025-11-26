@@ -5,10 +5,12 @@ import SocialProof from '@/components/SocialProof'
 import Discounts from '@/components/Discounts'
 import FinalCTA from '@/components/FinalCTA'
 import Navigation from '@/components/Navigation'
+import ScrollProgress from '@/components/ScrollProgress'
 
 export default function Home() {
   return (
     <main className="min-h-screen">
+      <ScrollProgress />
       <Navigation />
       <Hero />
       <About />

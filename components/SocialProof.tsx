@@ -104,10 +104,15 @@ export default function SocialProof() {
             <motion.div
               key={index}
               variants={itemVariants}
-              className="text-center p-8 bg-dark-surface rounded-2xl border border-gray-800"
+              className="text-center p-8 bg-dark-surface rounded-2xl border border-gray-800 group hover:border-gold-electric/50 transition-all duration-300 relative overflow-hidden"
+              whileHover={{ y: -5, scale: 1.02 }}
             >
+              {/* Animated background gradient on hover */}
               <motion.div
-                className="text-5xl md:text-6xl font-display font-bold text-gold-electric mb-4"
+                className="absolute inset-0 bg-gradient-to-br from-gold-electric/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              />
+              <motion.div
+                className="text-5xl md:text-6xl font-display font-bold text-gold-electric mb-4 relative z-10"
                 initial={{ scale: 0 }}
                 animate={isInView ? { scale: 1 } : { scale: 0 }}
                 transition={{
@@ -120,7 +125,7 @@ export default function SocialProof() {
                 {counters[index].toLocaleString()}
                 {stat.suffix}
               </motion.div>
-              <div className="text-xl text-gray-400 font-sans">{stat.label}</div>
+              <div className="text-xl text-gray-400 font-sans relative z-10 group-hover:text-gray-300 transition-colors">{stat.label}</div>
             </motion.div>
           ))}
         </motion.div>
