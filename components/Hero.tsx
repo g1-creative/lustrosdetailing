@@ -1,11 +1,12 @@
 'use client'
 
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { useRef } from 'react'
+import { useRef, useState, useEffect } from 'react'
 
 export default function Hero() {
   const videoRef = useRef<HTMLVideoElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
+  const [videoError, setVideoError] = useState(false)
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ['start start', 'end start']
@@ -13,6 +14,34 @@ export default function Hero() {
   
   const y = useTransform(scrollYProgress, [0, 1], ['0%', '50%'])
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0])
+
+  useEffect(() => {
+    const video = videoRef.current
+    if (video) {
+      // Try to load and play the video
+      const handleCanPlay = () => {
+        video.play().catch((error) => {
+          console.log('Video autoplay failed:', error)
+        })
+      }
+      
+      const handleError = (e: Event) => {
+        console.error('Video loading error:', e)
+        setVideoError(true)
+      }
+      
+      video.addEventListener('canplay', handleCanPlay)
+      video.addEventListener('error', handleError)
+      
+      // Force load
+      video.load()
+      
+      return () => {
+        video.removeEventListener('canplay', handleCanPlay)
+        video.removeEventListener('error', handleError)
+      }
+    }
+  }, [])
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -58,17 +87,24 @@ export default function Hero() {
         className="absolute inset-0 z-0"
         style={{ y, opacity }}
       >
-        <video
-          ref={videoRef}
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="absolute inset-0 w-full h-full object-cover"
-          style={{ filter: 'brightness(0.3) contrast(1.1)' }}
-        >
-          <source src="/images/video.mp4" type="video/mp4" />
-        </video>
+        {!videoError ? (
+          <video
+            ref={videoRef}
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+            className="absolute inset-0 w-full h-full object-cover"
+            style={{ filter: 'brightness(0.3) contrast(1.1)' }}
+            onError={() => setVideoError(true)}
+          >
+            <source src="/images/video.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        ) : (
+          <div className="absolute inset-0 bg-gradient-to-br from-black via-dark-soft to-black" />
+        )}
         {/* Dark overlay for text readability */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/60" />
       </motion.div>
@@ -200,11 +236,13 @@ export default function Hero() {
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
               onHoverStart={(e) => {
-                const rect = e.currentTarget.getBoundingClientRect()
-                const x = e.clientX - rect.left
-                const y = e.clientY - rect.top
-                e.currentTarget.style.setProperty('--x', `${x}px`)
-                e.currentTarget.style.setProperty('--y', `${y}px`)
+                if (e.currentTarget) {
+                  const rect = e.currentTarget.getBoundingClientRect()
+                  const x = e.clientX - rect.left
+                  const y = e.clientY - rect.top
+                  e.currentTarget.style.setProperty('--x', `${x}px`)
+                  e.currentTarget.style.setProperty('--y', `${y}px`)
+                }
               }}
             >
               <span className="relative z-10">Start Coaching</span>
