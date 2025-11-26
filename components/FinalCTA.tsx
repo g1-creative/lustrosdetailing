@@ -19,7 +19,6 @@ export default function FinalCTA() {
         opacity: {
           duration: 2,
           repeat: Infinity,
-          ease: 'easeInOut',
         },
       },
     },
