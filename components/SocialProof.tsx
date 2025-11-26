@@ -112,7 +112,7 @@ export default function SocialProof() {
                 animate={isInView ? { scale: 1 } : { scale: 0 }}
                 transition={{
                   delay: 0.3 + index * 0.2,
-                  type: 'spring',
+                  type: 'spring' as const,
                   stiffness: 200,
                   damping: 15,
                 }}
