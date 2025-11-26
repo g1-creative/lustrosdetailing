@@ -85,16 +85,8 @@
     @apply max-w-7xl mx-auto;
   }
 
-  .section-padding {
-    @apply py-20 px-4 sm:px-6 lg:px-8;
-  }
-
-  .container-custom {
-    @apply max-w-7xl mx-auto;
-  }
-
   .text-gradient {
-    @apply bg-gradient-to-r from-luxury-gold via-yellow-400 to-luxury-gold 
+    @apply bg-gradient-to-r from-gold-electric via-yellow-400 to-gold-electric 
            bg-clip-text text-transparent;
     background-size: 200% auto;
     animation: gradient-shift 3s ease infinite;
