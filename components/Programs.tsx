@@ -62,7 +62,6 @@ export default function Programs() {
       y: 0,
       transition: {
         duration: 0.6,
-        ease: "easeOut",
       },
     },
   }
@@ -113,7 +112,6 @@ export default function Programs() {
                 }}
                 transition={{
                   duration: 0.6,
-                  ease: "easeOut",
                 }}
               >
                 {/* Front */}

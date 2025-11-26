@@ -42,7 +42,6 @@ export default function Discounts() {
       y: 0,
       transition: {
         duration: 0.8,
-        ease: "easeOut",
         delay: 0.5,
       },
     },

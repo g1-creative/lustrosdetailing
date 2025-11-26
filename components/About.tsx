@@ -26,7 +26,6 @@ export default function About() {
       x: 0,
       transition: {
         duration: 0.8,
-        ease: "easeOut",
       },
     },
   }
@@ -38,7 +37,6 @@ export default function About() {
       x: 0,
       transition: {
         duration: 0.8,
-        ease: "easeOut",
       },
     },
   }
