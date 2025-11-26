@@ -235,16 +235,6 @@ export default function Hero() {
               className="btn-primary magnetic-button group relative px-10 py-5 text-lg"
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
-              onHoverStart={(e) => {
-                const target = e.currentTarget as HTMLButtonElement
-                if (target) {
-                  const rect = target.getBoundingClientRect()
-                  const x = e.clientX - rect.left
-                  const y = e.clientY - rect.top
-                  target.style.setProperty('--x', `${x}px`)
-                  target.style.setProperty('--y', `${y}px`)
-                }
-              }}
             >
               <span className="relative z-10">Start Coaching</span>
               <motion.div
