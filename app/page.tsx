@@ -1,6 +1,7 @@
 import Hero from '@/components/Hero'
 import About from '@/components/About'
 import Programs from '@/components/Programs'
+import VideoShowcase from '@/components/VideoShowcase'
 import SocialProof from '@/components/SocialProof'
 import Discounts from '@/components/Discounts'
 import FinalCTA from '@/components/FinalCTA'
@@ -14,6 +15,7 @@ export default function Home() {
       <Navigation />
       <Hero />
       <About />
+      <VideoShowcase />
       <Programs />
       <SocialProof />
       <Discounts />

@@ -12,36 +12,9 @@ export default function Hero() {
     offset: ['start start', 'end start']
   })
   
-  const y = useTransform(scrollYProgress, [0, 1], ['0%', '50%'])
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0])
-
-  useEffect(() => {
-    const video = videoRef.current
-    if (video) {
-      // Try to load and play the video
-      const handleCanPlay = () => {
-        video.play().catch((error) => {
-          console.log('Video autoplay failed:', error)
-        })
-      }
-      
-      const handleError = (e: Event) => {
-        console.error('Video loading error:', e)
-        setVideoError(true)
-      }
-      
-      video.addEventListener('canplay', handleCanPlay)
-      video.addEventListener('error', handleError)
-      
-      // Force load
-      video.load()
-      
-      return () => {
-        video.removeEventListener('canplay', handleCanPlay)
-        video.removeEventListener('error', handleError)
-      }
-    }
-  }, [])
+  const y = useTransform(scrollYProgress, [0, 1], ['0%', '30%'])
+  const opacity = useTransform(scrollYProgress, [0, 0.7], [1, 0])
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.1])
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -77,15 +50,43 @@ export default function Hero() {
     }),
   }
 
+  useEffect(() => {
+    const video = videoRef.current
+    if (video) {
+      // Try to load and play the video
+      const handleCanPlay = () => {
+        video.play().catch((error) => {
+          console.log('Video autoplay failed:', error)
+        })
+      }
+      
+      const handleError = (e: Event) => {
+        console.error('Video loading error:', e)
+        setVideoError(true)
+      }
+      
+      video.addEventListener('canplay', handleCanPlay)
+      video.addEventListener('error', handleError)
+      
+      // Force load
+      video.load()
+      
+      return () => {
+        video.removeEventListener('canplay', handleCanPlay)
+        video.removeEventListener('error', handleError)
+      }
+    }
+  }, [])
+
   return (
     <section 
       ref={containerRef}
       className="relative min-h-screen flex items-center justify-center bg-black overflow-hidden"
     >
-      {/* Cinematic Video Background */}
+      {/* Cinematic Video Background - More Visible */}
       <motion.div
         className="absolute inset-0 z-0"
-        style={{ y, opacity }}
+        style={{ y, opacity, scale }}
       >
         {!videoError ? (
           <video
@@ -96,7 +97,9 @@ export default function Hero() {
             playsInline
             preload="auto"
             className="absolute inset-0 w-full h-full object-cover"
-            style={{ filter: 'brightness(0.3) contrast(1.1)' }}
+            style={{ 
+              filter: 'brightness(0.5) contrast(1.2) saturate(1.1)',
+            }}
             onError={() => setVideoError(true)}
           >
             <source src="/images/video.mp4" type="video/mp4" />
@@ -105,14 +108,16 @@ export default function Hero() {
         ) : (
           <div className="absolute inset-0 bg-gradient-to-br from-black via-dark-soft to-black" />
         )}
-        {/* Dark overlay for text readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/60" />
+        {/* Lighter overlay - allows more video visibility */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/70" />
+        {/* Gold accent overlay for premium feel */}
+        <div className="absolute inset-0 bg-gradient-to-br from-gold-electric/5 via-transparent to-gold-electric/5" />
       </motion.div>
 
       {/* Floating gradient orbs */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         <motion.div
-          className="absolute top-20 left-10 w-96 h-96 bg-gold-electric/10 rounded-full blur-3xl"
+          className="absolute top-20 left-10 w-96 h-96 bg-gold-electric/15 rounded-full blur-3xl"
           animate={{
             x: [0, 100, 0],
             y: [0, 50, 0],
@@ -125,7 +130,7 @@ export default function Hero() {
           }}
         />
         <motion.div
-          className="absolute bottom-20 right-10 w-96 h-96 bg-gold-electric/10 rounded-full blur-3xl"
+          className="absolute bottom-20 right-10 w-96 h-96 bg-gold-electric/15 rounded-full blur-3xl"
           animate={{
             x: [0, -100, 0],
             y: [0, -50, 0],
@@ -139,7 +144,7 @@ export default function Hero() {
         />
       </div>
 
-      {/* Content */}
+      {/* Content with better contrast */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
         <motion.div
           className="max-w-4xl mx-auto text-center space-y-8"
@@ -152,7 +157,7 @@ export default function Hero() {
             variants={textVariants}
           >
             <motion.span 
-              className="text-white block"
+              className="text-white block drop-shadow-[0_0_30px_rgba(0,0,0,0.8)]"
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.5 }}
@@ -160,7 +165,7 @@ export default function Hero() {
               SIMPLIFYING
             </motion.span>
             <motion.span 
-              className="text-gold-electric block bg-gradient-to-r from-gold-electric via-yellow-300 to-gold-electric bg-clip-text text-transparent"
+              className="text-gold-electric block bg-gradient-to-r from-gold-electric via-yellow-300 to-gold-electric bg-clip-text text-transparent drop-shadow-[0_0_20px_rgba(255,215,0,0.5)]"
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.7 }}
@@ -170,21 +175,21 @@ export default function Hero() {
           </motion.h1>
 
           <motion.p
-            className="text-xl md:text-2xl lg:text-3xl text-gray-200 font-sans leading-relaxed max-w-3xl mx-auto"
+            className="text-xl md:text-2xl lg:text-3xl text-gray-100 font-sans leading-relaxed max-w-3xl mx-auto drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]"
             variants={textVariants}
           >
             1:1 coaching to transform your training, nutrition & lifestyle.
           </motion.p>
 
           <motion.ul
-            className="space-y-4 text-lg md:text-xl text-gray-300 font-sans max-w-2xl mx-auto"
+            className="space-y-4 text-lg md:text-xl text-gray-200 font-sans max-w-2xl mx-auto"
             variants={textVariants}
           >
             <motion.li
-              className="flex items-center justify-center gap-3 group"
+              className="flex items-center justify-center gap-3 group backdrop-blur-sm bg-black/20 px-4 py-2 rounded-lg"
               variants={bulletVariants}
               custom={0}
-              whileHover={{ x: 10 }}
+              whileHover={{ x: 10, scale: 1.02 }}
             >
               <motion.span 
                 className="text-gold-electric text-2xl"
@@ -193,13 +198,13 @@ export default function Hero() {
               >
                 ✓
               </motion.span>
-              <span>Training, nutrition & accountability</span>
+              <span className="drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">Training, nutrition & accountability</span>
             </motion.li>
             <motion.li
-              className="flex items-center justify-center gap-3 group"
+              className="flex items-center justify-center gap-3 group backdrop-blur-sm bg-black/20 px-4 py-2 rounded-lg"
               variants={bulletVariants}
               custom={1}
-              whileHover={{ x: 10 }}
+              whileHover={{ x: 10, scale: 1.02 }}
             >
               <motion.span 
                 className="text-gold-electric text-2xl"
@@ -208,13 +213,13 @@ export default function Hero() {
               >
                 ✓
               </motion.span>
-              <span>Student, military & first responder discounts</span>
+              <span className="drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">Student, military & first responder discounts</span>
             </motion.li>
             <motion.li
-              className="flex items-center justify-center gap-3 group"
+              className="flex items-center justify-center gap-3 group backdrop-blur-sm bg-black/20 px-4 py-2 rounded-lg"
               variants={bulletVariants}
               custom={2}
-              whileHover={{ x: 10 }}
+              whileHover={{ x: 10, scale: 1.02 }}
             >
               <motion.span 
                 className="text-gold-electric text-2xl"
@@ -223,7 +228,7 @@ export default function Hero() {
               >
                 ✓
               </motion.span>
-              <span>Must be 18+ and ready to commit mentally, physically & financially</span>
+              <span className="drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">Must be 18+ and ready to commit mentally, physically & financially</span>
             </motion.li>
           </motion.ul>
 
@@ -232,7 +237,7 @@ export default function Hero() {
             variants={textVariants}
           >
             <motion.button
-              className="btn-primary magnetic-button group relative px-10 py-5 text-lg"
+              className="btn-primary magnetic-button group relative px-10 py-5 text-lg backdrop-blur-sm"
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -243,7 +248,7 @@ export default function Hero() {
               />
             </motion.button>
             <motion.button
-              className="btn-secondary magnetic-button group relative px-10 py-5 text-lg"
+              className="btn-secondary magnetic-button group relative px-10 py-5 text-lg backdrop-blur-sm"
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -257,7 +262,7 @@ export default function Hero() {
             animate={{ y: [0, 10, 0] }}
             transition={{ duration: 2, repeat: Infinity }}
           >
-            <div className="w-6 h-10 border-2 border-gold-electric/50 rounded-full flex justify-center">
+            <div className="w-6 h-10 border-2 border-gold-electric/70 rounded-full flex justify-center backdrop-blur-sm bg-black/20">
               <motion.div
                 className="w-1 h-3 bg-gold-electric rounded-full mt-2"
                 animate={{ y: [0, 12, 0] }}

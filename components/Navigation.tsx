@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
+import Image from 'next/image'
 
 export default function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -41,12 +42,21 @@ export default function Navigation() {
     >
       <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between py-4">
-          <button
+          <motion.button
             onClick={scrollToTop}
-            className="text-2xl font-display font-bold text-white hover:text-gold-electric transition-colors"
+            className="relative h-12 w-auto hover:opacity-80 transition-opacity"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
-            Michael Yongbi
-          </button>
+            <Image
+              src="/images/logo.png"
+              alt="Michael Yongbi Logo"
+              width={150}
+              height={48}
+              className="object-contain h-full w-auto"
+              priority
+            />
+          </motion.button>
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-8">
