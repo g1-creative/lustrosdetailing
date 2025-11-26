@@ -15,7 +15,7 @@ export default function FinalCTA() {
       transition: {
         scaleX: {
           duration: 1,
-          ease: [0.16, 1, 0.3, 1],
+          ease: "easeOut",
         },
         opacity: {
           duration: 2,
@@ -44,7 +44,7 @@ export default function FinalCTA() {
       y: 0,
       transition: {
         duration: 0.8,
-        ease: [0.16, 1, 0.3, 1],
+        ease: "easeOut",
       },
     },
   }
@@ -56,7 +56,7 @@ export default function FinalCTA() {
       scale: 1,
       transition: {
         duration: 0.6,
-        ease: [0.16, 1, 0.3, 1],
+        ease: "easeOut",
       },
     },
   }

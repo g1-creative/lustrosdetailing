@@ -22,7 +22,7 @@ export default function Hero() {
       y: 0,
       transition: {
         duration: 0.8,
-        ease: [0.16, 1, 0.3, 1],
+        ease: "easeOut",
       },
     },
   }
@@ -33,10 +33,9 @@ export default function Hero() {
       opacity: 1,
       x: 0,
       transition: {
-        duration: 1,
-        ease: [0.16, 1, 0.3, 1],
         type: 'spring',
         stiffness: 100,
+        damping: 15,
       },
     },
   }
@@ -49,7 +48,7 @@ export default function Hero() {
       transition: {
         delay: 0.5 + i * 0.1,
         duration: 0.6,
-        ease: [0.16, 1, 0.3, 1],
+        ease: "easeOut",
       },
     }),
   }
