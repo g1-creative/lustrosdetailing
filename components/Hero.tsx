@@ -1,12 +1,10 @@
 'use client'
 
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { useRef, useState, useEffect } from 'react'
+import { useRef } from 'react'
 
 export default function Hero() {
-  const videoRef = useRef<HTMLVideoElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
-  const [videoError, setVideoError] = useState(false)
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ['start start', 'end start']
@@ -14,15 +12,14 @@ export default function Hero() {
   
   const y = useTransform(scrollYProgress, [0, 1], ['0%', '30%'])
   const opacity = useTransform(scrollYProgress, [0, 0.7], [1, 0])
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.1])
 
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3,
+        staggerChildren: 0.15,
+        delayChildren: 0.2,
       },
     },
   }
@@ -44,228 +41,171 @@ export default function Hero() {
       opacity: 1,
       x: 0,
       transition: {
-        delay: 0.5 + i * 0.1,
+        delay: 0.4 + i * 0.1,
         duration: 0.6,
       },
     }),
   }
-
-  useEffect(() => {
-    const video = videoRef.current
-    if (video) {
-      // Try to load and play the video
-      const handleCanPlay = () => {
-        video.play().catch((error) => {
-          console.log('Video autoplay failed:', error)
-        })
-      }
-      
-      const handleError = (e: Event) => {
-        console.error('Video loading error:', e)
-        setVideoError(true)
-      }
-      
-      video.addEventListener('canplay', handleCanPlay)
-      video.addEventListener('error', handleError)
-      
-      // Force load
-      video.load()
-      
-      return () => {
-        video.removeEventListener('canplay', handleCanPlay)
-        video.removeEventListener('error', handleError)
-      }
-    }
-  }, [])
 
   return (
     <section 
       ref={containerRef}
       className="relative min-h-screen flex items-center justify-center bg-black overflow-hidden"
     >
-      {/* Cinematic Video Background - More Visible */}
-      <motion.div
-        className="absolute inset-0 z-0"
-        style={{ y, opacity, scale }}
-      >
-        {!videoError ? (
-          <video
-            ref={videoRef}
-            autoPlay
-            loop
-            muted
-            playsInline
-            preload="auto"
-            className="absolute inset-0 w-full h-full object-cover"
-            style={{ 
-              filter: 'brightness(0.5) contrast(1.2) saturate(1.1)',
-            }}
-            onError={() => setVideoError(true)}
-          >
-            <source src="/images/video.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-        ) : (
-          <div className="absolute inset-0 bg-gradient-to-br from-black via-dark-soft to-black" />
-        )}
-        {/* Lighter overlay - allows more video visibility */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/70" />
-        {/* Gold accent overlay for premium feel */}
-        <div className="absolute inset-0 bg-gradient-to-br from-gold-electric/5 via-transparent to-gold-electric/5" />
-      </motion.div>
+      {/* Professional gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-black via-dark-soft to-black">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,215,0,0.05),transparent_50%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(255,215,0,0.05),transparent_50%)]" />
+      </div>
 
-      {/* Floating gradient orbs */}
+      {/* Subtle animated orbs */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         <motion.div
-          className="absolute top-20 left-10 w-96 h-96 bg-gold-electric/15 rounded-full blur-3xl"
+          className="absolute top-20 left-10 w-96 h-96 bg-gold-electric/5 rounded-full blur-3xl"
           animate={{
-            x: [0, 100, 0],
-            y: [0, 50, 0],
-            scale: [1, 1.2, 1],
+            x: [0, 50, 0],
+            y: [0, 30, 0],
+            scale: [1, 1.1, 1],
           }}
           transition={{
-            duration: 20,
+            duration: 15,
             repeat: Infinity,
             ease: 'linear',
           }}
         />
         <motion.div
-          className="absolute bottom-20 right-10 w-96 h-96 bg-gold-electric/15 rounded-full blur-3xl"
+          className="absolute bottom-20 right-10 w-96 h-96 bg-gold-electric/5 rounded-full blur-3xl"
           animate={{
-            x: [0, -100, 0],
-            y: [0, -50, 0],
-            scale: [1, 1.2, 1],
+            x: [0, -50, 0],
+            y: [0, -30, 0],
+            scale: [1, 1.1, 1],
           }}
           transition={{
-            duration: 25,
+            duration: 18,
             repeat: Infinity,
             ease: 'linear',
           }}
         />
       </div>
 
-      {/* Content with better contrast */}
+      {/* Content */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
         <motion.div
-          className="max-w-4xl mx-auto text-center space-y-8"
+          className="max-w-5xl mx-auto text-center space-y-10"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
           <motion.h1
-            className="text-6xl md:text-7xl lg:text-8xl font-display font-bold leading-tight"
+            className="text-6xl md:text-7xl lg:text-8xl font-display font-bold leading-[1.1] tracking-tight"
             variants={textVariants}
           >
             <motion.span 
-              className="text-white block drop-shadow-[0_0_30px_rgba(0,0,0,0.8)]"
+              className="text-white block"
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.5 }}
+              transition={{ duration: 1, delay: 0.3 }}
             >
               SIMPLIFYING
             </motion.span>
             <motion.span 
-              className="text-gold-electric block bg-gradient-to-r from-gold-electric via-yellow-300 to-gold-electric bg-clip-text text-transparent drop-shadow-[0_0_20px_rgba(255,215,0,0.5)]"
+              className="text-gold-electric block mt-2"
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.7 }}
+              transition={{ duration: 1, delay: 0.5 }}
             >
               PROGRESSION
             </motion.span>
           </motion.h1>
 
           <motion.p
-            className="text-xl md:text-2xl lg:text-3xl text-gray-100 font-sans leading-relaxed max-w-3xl mx-auto drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]"
+            className="text-xl md:text-2xl lg:text-3xl text-gray-300 font-sans leading-relaxed max-w-3xl mx-auto font-light"
             variants={textVariants}
           >
             1:1 coaching to transform your training, nutrition & lifestyle.
           </motion.p>
 
           <motion.ul
-            className="space-y-4 text-lg md:text-xl text-gray-200 font-sans max-w-2xl mx-auto"
+            className="space-y-5 text-lg md:text-xl text-gray-400 font-sans max-w-2xl mx-auto"
             variants={textVariants}
           >
             <motion.li
-              className="flex items-center justify-center gap-3 group backdrop-blur-sm bg-black/20 px-4 py-2 rounded-lg"
+              className="flex items-center justify-center gap-4 group"
               variants={bulletVariants}
               custom={0}
-              whileHover={{ x: 10, scale: 1.02 }}
+              whileHover={{ x: 5 }}
             >
               <motion.span 
-                className="text-gold-electric text-2xl"
-                whileHover={{ rotate: 360, scale: 1.2 }}
-                transition={{ duration: 0.5 }}
+                className="text-gold-electric text-xl font-bold"
+                whileHover={{ scale: 1.2 }}
+                transition={{ duration: 0.3 }}
               >
                 ✓
               </motion.span>
-              <span className="drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">Training, nutrition & accountability</span>
+              <span>Training, nutrition & accountability</span>
             </motion.li>
             <motion.li
-              className="flex items-center justify-center gap-3 group backdrop-blur-sm bg-black/20 px-4 py-2 rounded-lg"
+              className="flex items-center justify-center gap-4 group"
               variants={bulletVariants}
               custom={1}
-              whileHover={{ x: 10, scale: 1.02 }}
+              whileHover={{ x: 5 }}
             >
               <motion.span 
-                className="text-gold-electric text-2xl"
-                whileHover={{ rotate: 360, scale: 1.2 }}
-                transition={{ duration: 0.5 }}
+                className="text-gold-electric text-xl font-bold"
+                whileHover={{ scale: 1.2 }}
+                transition={{ duration: 0.3 }}
               >
                 ✓
               </motion.span>
-              <span className="drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">Student, military & first responder discounts</span>
+              <span>Student, military & first responder discounts</span>
             </motion.li>
             <motion.li
-              className="flex items-center justify-center gap-3 group backdrop-blur-sm bg-black/20 px-4 py-2 rounded-lg"
+              className="flex items-center justify-center gap-4 group"
               variants={bulletVariants}
               custom={2}
-              whileHover={{ x: 10, scale: 1.02 }}
+              whileHover={{ x: 5 }}
             >
               <motion.span 
-                className="text-gold-electric text-2xl"
-                whileHover={{ rotate: 360, scale: 1.2 }}
-                transition={{ duration: 0.5 }}
+                className="text-gold-electric text-xl font-bold"
+                whileHover={{ scale: 1.2 }}
+                transition={{ duration: 0.3 }}
               >
                 ✓
               </motion.span>
-              <span className="drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">Must be 18+ and ready to commit mentally, physically & financially</span>
+              <span>Must be 18+ and ready to commit mentally, physically & financially</span>
             </motion.li>
           </motion.ul>
 
           <motion.div
-            className="flex flex-col sm:flex-row gap-6 pt-8 justify-center items-center"
+            className="flex flex-col sm:flex-row gap-5 pt-6 justify-center items-center"
             variants={textVariants}
           >
             <motion.button
-              className="btn-primary magnetic-button group relative px-10 py-5 text-lg backdrop-blur-sm"
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.95 }}
+              className="btn-primary px-10 py-4 text-lg font-semibold"
+              whileHover={{ scale: 1.02, y: -2 }}
+              whileTap={{ scale: 0.98 }}
             >
-              <span className="relative z-10">Start Coaching</span>
-              <motion.div
-                className="absolute inset-0 bg-gold-electric/20 rounded-lg blur-xl opacity-0 group-hover:opacity-100 transition-opacity"
-                style={{ filter: 'blur(20px)' }}
-              />
+              Start Coaching
             </motion.button>
             <motion.button
-              className="btn-secondary magnetic-button group relative px-10 py-5 text-lg backdrop-blur-sm"
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.95 }}
+              className="btn-secondary px-10 py-4 text-lg font-semibold"
+              whileHover={{ scale: 1.02, y: -2 }}
+              whileTap={{ scale: 0.98 }}
             >
-              <span className="relative z-10">Ask a Question</span>
+              Ask a Question
             </motion.button>
           </motion.div>
 
           {/* Scroll indicator */}
           <motion.div
             className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
-            animate={{ y: [0, 10, 0] }}
+            animate={{ y: [0, 8, 0] }}
             transition={{ duration: 2, repeat: Infinity }}
           >
-            <div className="w-6 h-10 border-2 border-gold-electric/70 rounded-full flex justify-center backdrop-blur-sm bg-black/20">
+            <div className="w-6 h-10 border-2 border-gold-electric/40 rounded-full flex justify-center">
               <motion.div
                 className="w-1 h-3 bg-gold-electric rounded-full mt-2"
-                animate={{ y: [0, 12, 0] }}
+                animate={{ y: [0, 10, 0] }}
                 transition={{ duration: 1.5, repeat: Infinity }}
               />
             </div>

@@ -26,9 +26,9 @@
 
 @layer components {
   .btn-primary {
-    @apply bg-gold-electric text-black font-display font-bold py-4 px-8 rounded-lg 
-           transition-all duration-300 transform hover:scale-105
-           shadow-lg hover:shadow-gold-electric/50 relative overflow-hidden;
+    @apply bg-gold-electric text-black font-display font-semibold py-4 px-8 rounded-lg 
+           transition-all duration-300
+           shadow-lg hover:shadow-xl hover:shadow-gold-electric/30 relative overflow-hidden;
     background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
   }
 
@@ -48,9 +48,9 @@
   }
 
   .btn-secondary {
-    @apply bg-transparent border-2 border-white text-white font-display font-bold py-4 px-8 rounded-lg 
-           hover:bg-white hover:text-black transition-all duration-300
-           transform hover:scale-105 relative overflow-hidden;
+    @apply bg-transparent border-2 border-gray-300 text-white font-display font-semibold py-4 px-8 rounded-lg 
+           hover:border-white hover:bg-white/10 hover:text-white transition-all duration-300
+           relative overflow-hidden backdrop-blur-sm;
   }
 
   .btn-secondary::after {
