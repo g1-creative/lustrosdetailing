@@ -16,6 +16,8 @@
     @apply bg-black text-white;
     overflow-x: hidden;
     background-color: #000000;
+    font-feature-settings: 'kern' 1, 'liga' 1;
+    text-rendering: optimizeLegibility;
   }
 
   * {

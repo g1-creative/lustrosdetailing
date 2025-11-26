@@ -11,10 +11,10 @@ export default function FinalCTA() {
     hidden: { scaleX: 0, opacity: 0 },
     visible: {
       scaleX: 1,
-      opacity: [0.5, 1, 0.5],
+      opacity: [0.6, 1, 0.6],
       transition: {
         scaleX: {
-          duration: 1,
+          duration: 1.2,
         },
         opacity: {
           duration: 2,
@@ -29,7 +29,7 @@ export default function FinalCTA() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.3,
+        staggerChildren: 0.2,
         delayChildren: 0.2,
       },
     },
@@ -47,12 +47,13 @@ export default function FinalCTA() {
   }
 
   const buttonVariants = {
-    hidden: { opacity: 0, scale: 0.8 },
+    hidden: { opacity: 0, scale: 0.9 },
     visible: {
       opacity: 1,
       scale: 1,
       transition: {
         duration: 0.6,
+        delay: 0.4,
       },
     },
   }
@@ -60,36 +61,43 @@ export default function FinalCTA() {
   return (
     <section
       ref={ref}
-      className="py-20 md:py-32 px-4 sm:px-6 lg:px-8 bg-dark-soft relative overflow-hidden"
+      className="py-24 md:py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-dark-soft via-black to-black relative overflow-hidden"
     >
       {/* Animated glowing line */}
       <motion.div
-        className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-gold-electric to-transparent origin-left"
+        className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-gold-electric to-transparent origin-left"
         variants={lineVariants}
         initial="hidden"
         animate={isInView ? 'visible' : 'hidden'}
         style={{
-          boxShadow: '0 0 20px rgba(255, 215, 0, 0.5), 0 0 40px rgba(255, 215, 0, 0.3)',
+          boxShadow: '0 0 30px rgba(255, 215, 0, 0.6), 0 0 60px rgba(255, 215, 0, 0.3)',
         }}
       />
 
-      <div className="container mx-auto max-w-4xl">
+      {/* Background pattern */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_2px_2px,rgba(255,215,0,0.15)_1px,transparent_0)] bg-[length:40px_40px]" />
+      </div>
+
+      <div className="container mx-auto max-w-5xl relative z-10">
         <motion.div
-          className="text-center space-y-8"
+          className="text-center space-y-10"
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
         >
           <motion.h2
-            className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-white leading-tight"
+            className="text-5xl md:text-6xl lg:text-7xl font-display font-bold text-white leading-tight"
             variants={textVariants}
           >
             Ready to change your{' '}
-            <span className="text-gold-electric">life</span>?
+            <span className="text-gold-electric bg-gradient-to-r from-gold-electric via-yellow-300 to-gold-electric bg-clip-text text-transparent">
+              life
+            </span>?
           </motion.h2>
 
           <motion.p
-            className="text-xl md:text-2xl text-gray-300 font-sans"
+            className="text-xl md:text-2xl text-gray-300 font-sans font-light"
             variants={textVariants}
           >
             Apply for coaching today.
@@ -97,26 +105,13 @@ export default function FinalCTA() {
 
           <motion.div variants={buttonVariants}>
             <motion.button
-              className="btn-primary text-lg px-12 py-6 magnetic-button group relative overflow-hidden"
+              className="btn-primary text-lg px-12 py-6 group relative overflow-hidden"
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
             >
-              <motion.span
-                className="relative z-10"
-                initial={{ opacity: 1 }}
-                whileHover={{ opacity: 0 }}
-              >
-                Start Now
-              </motion.span>
-              <motion.span
-                className="absolute inset-0 flex items-center justify-center relative z-10"
-                initial={{ opacity: 0, y: 20 }}
-                whileHover={{ opacity: 1, y: 0 }}
-              >
-                Start Now →
-              </motion.span>
+              <span className="relative z-10 font-semibold">Start Now</span>
               <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-gold-electric via-yellow-300 to-gold-electric opacity-0 group-hover:opacity-100"
+                className="absolute inset-0 bg-gradient-to-r from-gold-electric via-yellow-300 to-gold-electric opacity-0 group-hover:opacity-20 transition-opacity duration-500"
                 animate={{
                   backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
                 }}

@@ -4,9 +4,9 @@ import { motion, useInView } from 'framer-motion'
 import { useRef, useEffect, useState } from 'react'
 
 const stats = [
-  { label: 'Followers', value: 4010, suffix: '' },
-  { label: 'Posts', value: 18, suffix: '' },
-  { label: 'Following', value: 2115, suffix: '' },
+  { label: 'Followers', value: 4010, suffix: '', icon: '👥' },
+  { label: 'Posts', value: 18, suffix: '', icon: '📸' },
+  { label: 'Following', value: 2115, suffix: '', icon: '🤝' },
 ]
 
 export default function SocialProof() {
@@ -53,7 +53,7 @@ export default function SocialProof() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
+        staggerChildren: 0.15,
       },
     },
   }
@@ -72,30 +72,46 @@ export default function SocialProof() {
   return (
     <section
       ref={ref}
-      className="py-20 md:py-32 px-4 sm:px-6 lg:px-8 bg-dark-soft"
+      className="py-24 md:py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-dark-soft via-black to-dark-soft relative overflow-hidden"
     >
-      <div className="container mx-auto max-w-7xl">
+      {/* Background pattern */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_2px_2px,rgba(255,215,0,0.15)_1px,transparent_0)] bg-[length:40px_40px]" />
+      </div>
+
+      <div className="container mx-auto max-w-7xl relative z-10">
+        {/* Section Header */}
         <motion.div
-          className="text-center mb-16"
+          className="text-center mb-16 md:mb-20"
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.8 }}
         >
-          <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-4">
-            Join the <span className="text-gold-electric">Community</span>
+          <div className="inline-block mb-4">
+            <span className="text-gold-electric text-sm md:text-base font-sans font-semibold tracking-[0.2em] uppercase">
+              Community
+            </span>
+            <div className="h-0.5 w-full bg-gradient-to-r from-transparent via-gold-electric to-transparent mt-2" />
+          </div>
+          <h2 className="text-5xl md:text-6xl lg:text-7xl font-display font-bold text-white mb-6 leading-tight">
+            Join the <span className="text-gold-electric">Movement</span>
           </h2>
-          <a
+          <motion.a
             href="https://instagram.com/mikeyyongbi"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-xl text-gold-electric hover:text-gold-400 transition-colors font-sans"
+            className="inline-flex items-center gap-2 text-xl text-gold-electric hover:text-yellow-300 transition-colors font-sans group"
+            whileHover={{ scale: 1.05 }}
           >
-            @mikeyyongbi
-          </a>
+            <span>@mikeyyongbi</span>
+            <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </motion.a>
         </motion.div>
 
         <motion.div
-          className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto"
+          className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto"
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
@@ -104,28 +120,42 @@ export default function SocialProof() {
             <motion.div
               key={index}
               variants={itemVariants}
-              className="text-center p-8 bg-dark-surface rounded-2xl border border-gray-800 group hover:border-gold-electric/50 transition-all duration-300 relative overflow-hidden"
-              whileHover={{ y: -5, scale: 1.02 }}
+              className="text-center p-10 bg-dark-surface/80 backdrop-blur-sm rounded-3xl border border-gray-800 group hover:border-gold-electric/40 transition-all duration-500 relative overflow-hidden"
+              whileHover={{ y: -8, scale: 1.02 }}
             >
               {/* Animated background gradient on hover */}
               <motion.div
-                className="absolute inset-0 bg-gradient-to-br from-gold-electric/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                className="absolute inset-0 bg-gradient-to-br from-gold-electric/10 via-gold-electric/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"
               />
-              <motion.div
-                className="text-5xl md:text-6xl font-display font-bold text-gold-electric mb-4 relative z-10"
-                initial={{ scale: 0 }}
-                animate={isInView ? { scale: 1 } : { scale: 0 }}
-                transition={{
-                  delay: 0.3 + index * 0.2,
-                  type: 'spring' as const,
-                  stiffness: 200,
-                  damping: 15,
-                }}
-              >
-                {counters[index].toLocaleString()}
-                {stat.suffix}
-              </motion.div>
-              <div className="text-xl text-gray-400 font-sans relative z-10 group-hover:text-gray-300 transition-colors">{stat.label}</div>
+
+              {/* Decorative corner accent */}
+              <div className="absolute top-0 right-0 w-20 h-20 bg-gold-electric/5 rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity" />
+
+              <div className="relative z-10">
+                {/* Icon */}
+                <div className="text-4xl mb-6">{stat.icon}</div>
+
+                {/* Number */}
+                <motion.div
+                  className="text-5xl md:text-6xl font-display font-bold text-gold-electric mb-4"
+                  initial={{ scale: 0 }}
+                  animate={isInView ? { scale: 1 } : { scale: 0 }}
+                  transition={{
+                    delay: 0.3 + index * 0.15,
+                    type: 'spring' as const,
+                    stiffness: 200,
+                    damping: 15,
+                  }}
+                >
+                  {counters[index].toLocaleString()}
+                  {stat.suffix}
+                </motion.div>
+
+                {/* Label */}
+                <div className="text-lg text-gray-400 font-sans uppercase tracking-wider group-hover:text-gray-300 transition-colors">
+                  {stat.label}
+                </div>
+              </div>
             </motion.div>
           ))}
         </motion.div>
@@ -133,4 +163,3 @@ export default function SocialProof() {
     </section>
   )
 }
-
